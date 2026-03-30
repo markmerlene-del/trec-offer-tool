@@ -1,23 +1,22 @@
-import { PDFDocument } from 'pdf-lib'
+import { PDFDocument, rgb, StandardFonts } from 'pdf-lib'
 import { OfferFormData } from './types'
 import { TrecFormDef } from './trec-forms'
 
-/**
- * Download a PDF from a URL and return raw bytes.
- * We avoid caching so we always get the latest TREC version.
- */
 export async function downloadPdf(url: string): Promise<ArrayBuffer> {
   const res = await fetch(url, { cache: 'no-store' })
-  if (!res.ok) {
-    throw new Error(`Failed to download ${url}: ${res.status} ${res.statusText}`)
-  }
+  if (!res.ok) throw new Error(`Failed to download ${url}: ${res.status} ${res.statusText}`)
   return res.arrayBuffer()
 }
 
-/**
- * Flatten our OfferFormData into a simple key→value map that matches
- * the keys used in each form's fieldMap.
- */
+/** x, y, page (0-indexed), optional max width for wrapping */
+export interface FieldCoord {
+  x: number
+  y: number
+  page?: number
+  maxWidth?: number
+  size?: number
+}
+
 function buildValueMap(data: OfferFormData): Record<string, string> {
   const b = data.buyer
   const p = data.property
@@ -26,19 +25,13 @@ function buildValueMap(data: OfferFormData): Record<string, string> {
   const c = data.closing
   const a = data.addenda
 
-  const buyerNames = [
-    [b.buyer1FirstName, b.buyer1LastName].filter(Boolean).join(' '),
-    [b.buyer2FirstName, b.buyer2LastName].filter(Boolean).join(' '),
-  ]
-    .filter(Boolean)
-    .join(' and ')
-
   const buyer1Full = [b.buyer1FirstName, b.buyer1LastName].filter(Boolean).join(' ')
+  const buyer2Full = [b.buyer2FirstName, b.buyer2LastName].filter(Boolean).join(' ')
+  const buyerNames = [buyer1Full, buyer2Full].filter(Boolean).join(' and ')
 
-  const cashPortion =
-    f.paymentType === 'cash'
-      ? t.salesPrice
-      : String(parseFloat(t.salesPrice.replace(/,/g, '') || '0') - parseFloat(f.loanAmount.replace(/,/g, '') || '0'))
+  const salesPriceNum = parseFloat(t.salesPrice.replace(/,/g, '') || '0')
+  const loanNum = parseFloat(f.loanAmount.replace(/,/g, '') || '0')
+  const cashPortion = f.paymentType === 'cash' ? salesPriceNum : salesPriceNum - loanNum
 
   const possession = c.possessionAtClosing
     ? 'At Closing'
@@ -53,19 +46,22 @@ function buildValueMap(data: OfferFormData): Record<string, string> {
   }
 
   return {
-    buyer1Name: buyer1Full,
-    buyer2Name: [b.buyer2FirstName, b.buyer2LastName].filter(Boolean).join(' '),
     buyerNames,
-    propertyAddress: `${p.streetAddress}, ${p.city}, ${p.state} ${p.zip}`,
+    buyer1Name: buyer1Full,
+    buyer2Name: buyer2Full,
+    propertyAddress: p.streetAddress,
+    cityStateZip: `${p.city}, ${p.state} ${p.zip}`,
     city: p.city,
     county: p.county,
+    state: p.state,
+    zip: p.zip,
     legalDescription: p.legalDescription,
-    salesPrice: formatCurrency(t.salesPrice),
-    cashPortion: formatCurrency(String(cashPortion)),
-    loanAmount: formatCurrency(f.loanAmount),
-    earnestMoney: formatCurrency(t.earnestMoney),
+    salesPrice: fmt(t.salesPrice),
+    cashPortion: fmt(String(cashPortion)),
+    loanAmount: fmt(f.loanAmount),
+    earnestMoney: fmt(t.earnestMoney),
     earnestMoneyHolder: t.earnestMoneyHolder,
-    optionFee: formatCurrency(t.optionFee),
+    optionFee: fmt(t.optionFee),
     optionDays: t.optionDays,
     titleCompany: c.titleCompanyName,
     closingDate: c.closingDate,
@@ -79,55 +75,61 @@ function buildValueMap(data: OfferFormData): Record<string, string> {
     nonRealtyItems: a.nonRealtyItems,
     buyerTempLeaseDays: a.buyerTempLeaseDays,
     sellerTempLeaseDays: a.sellerTempLeaseDays,
+    buyerEmail: b.email,
+    buyerPhone: b.phone,
   }
 }
 
-function formatCurrency(value: string): string {
+function fmt(value: string): string {
   const num = parseFloat(value.replace(/,/g, '') || '0')
   if (isNaN(num)) return value
   return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
-/**
- * Fill a single TREC form PDF with data from the offer form.
- * Returns the filled PDF bytes.
- */
 export async function fillForm(
   formDef: TrecFormDef,
-  data: OfferFormData
+  data: OfferFormData,
+  debug = false
 ): Promise<Uint8Array> {
   const pdfBytes = await downloadPdf(formDef.url)
   const pdf = await PDFDocument.load(pdfBytes, { ignoreEncryption: true })
-  const form = pdf.getForm()
+  const font = await pdf.embedFont(StandardFonts.Helvetica)
+  const pages = pdf.getPages()
   const values = buildValueMap(data)
 
-  for (const [dataKey, pdfFieldName] of Object.entries(formDef.fieldMap)) {
+  for (const [dataKey, coord] of Object.entries(formDef.coords)) {
     const value = values[dataKey]
     if (!value) continue
-    try {
-      const field = form.getTextField(pdfFieldName)
-      field.setText(value)
-    } catch {
-      // Field name may differ in this version — silently skip
-    }
-  }
+    const pageIndex = coord.page ?? 0
+    const page = pages[pageIndex]
+    if (!page) continue
+    const fontSize = coord.size ?? 9
 
-  // Flatten so the filled values are visible even in readers that don't support forms
-  try {
-    form.flatten()
-  } catch {
-    // Some encrypted forms cannot be flattened — leave interactive
+    if (debug) {
+      // Draw a red dot to show where the text will land
+      page.drawCircle({ x: coord.x, y: coord.y, size: 3, color: rgb(1, 0, 0) })
+    }
+
+    page.drawText(value, {
+      x: coord.x,
+      y: coord.y,
+      size: fontSize,
+      font,
+      color: rgb(0, 0, 0),
+      maxWidth: coord.maxWidth,
+    })
   }
 
   return pdf.save()
 }
 
-/**
- * Return the actual PDF field names for a form (useful for debugging / mapping).
- */
-export async function listFields(url: string): Promise<string[]> {
+/** Returns raw bytes and page dimensions — useful for coordinate calibration */
+export async function getPdfInfo(url: string): Promise<{ pages: { width: number; height: number }[] }> {
   const pdfBytes = await downloadPdf(url)
   const pdf = await PDFDocument.load(pdfBytes, { ignoreEncryption: true })
-  const form = pdf.getForm()
-  return form.getFields().map((f) => f.getName())
+  const pages = pdf.getPages().map((p) => {
+    const { width, height } = p.getSize()
+    return { width, height }
+  })
+  return { pages }
 }

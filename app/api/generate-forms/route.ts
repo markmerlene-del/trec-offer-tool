@@ -55,10 +55,12 @@ export async function POST(req: NextRequest) {
     forms.push(FORM_15_6)
   }
 
+  const debug = req.nextUrl.searchParams.get('debug') === '1'
+
   // Fill all forms in parallel
   const results = await Promise.allSettled(
     forms.map(async (formDef) => {
-      const bytes = await fillForm(formDef, data)
+      const bytes = await fillForm(formDef, data, debug)
       return { formDef, bytes }
     })
   )

@@ -1,48 +1,39 @@
-// TREC form definitions — URLs point to the live TREC website so forms are always current.
-// Field names were derived by inspecting the fillable PDF form fields.
+import { FieldCoord } from './pdf-filler'
 
 export interface TrecFormDef {
   id: string
   name: string
   url: string
-  // Maps our intake field keys → PDF field names inside the form
-  fieldMap: Record<string, string>
+  coords: Record<string, FieldCoord>
 }
 
 export const TREC_BASE = 'https://www.trec.texas.gov/sites/default/files/pdf-forms'
 
 // ─────────────────────────────────────────────────────────────────────────────
 // One to Four Family Residential Contract (Resale) — TREC 20-16
+// Page size: 612 x 792 pt (8.5 x 11 in)
+// Coordinates are x from left edge, y from bottom edge (pdf-lib convention)
 // ─────────────────────────────────────────────────────────────────────────────
 export const FORM_20_16: TrecFormDef = {
   id: '20-16',
   name: 'One to Four Family Residential Contract (Resale)',
   url: `${TREC_BASE}/20-16.pdf`,
-  fieldMap: {
-    // Buyers
-    buyer1Name: 'Buyer 1 Name',
-    buyer2Name: 'Buyer 2 Name',
-    // Property
-    propertyAddress: 'Property Address',
-    city: 'City',
-    county: 'County',
-    legalDescription: 'Legal Description',
-    // Price
-    salesPrice: 'Sales Price',
-    cashPortion: 'Cash Portion',
-    loanAmount: 'Loan Amount',
-    // Earnest money
-    earnestMoney: 'Earnest Money',
-    earnestMoneyHolder: 'Earnest Money Holder',
-    // Option
-    optionFee: 'Option Fee',
-    optionDays: 'Option Days',
-    // Title
-    titleCompany: 'Title Company',
-    // Closing
-    closingDate: 'Closing Date',
-    // Possession
-    possession: 'Possession',
+  coords: {
+    buyerNames:         { x: 128, y: 693, page: 0, maxWidth: 420, size: 9 },
+    propertyAddress:    { x: 88,  y: 650, page: 0, maxWidth: 320, size: 9 },
+    city:               { x: 88,  y: 632, page: 0, maxWidth: 160, size: 9 },
+    county:             { x: 350, y: 632, page: 0, maxWidth: 160, size: 9 },
+    legalDescription:   { x: 88,  y: 612, page: 0, maxWidth: 450, size: 9 },
+    salesPrice:         { x: 370, y: 565, page: 0, maxWidth: 120, size: 9 },
+    cashPortion:        { x: 370, y: 548, page: 0, maxWidth: 120, size: 9 },
+    loanAmount:         { x: 370, y: 530, page: 0, maxWidth: 120, size: 9 },
+    earnestMoney:       { x: 200, y: 490, page: 0, maxWidth: 120, size: 9 },
+    earnestMoneyHolder: { x: 370, y: 490, page: 0, maxWidth: 180, size: 9 },
+    optionDays:         { x: 170, y: 450, page: 0, maxWidth: 60,  size: 9 },
+    optionFee:          { x: 300, y: 450, page: 0, maxWidth: 80,  size: 9 },
+    titleCompany:       { x: 180, y: 390, page: 0, maxWidth: 280, size: 9 },
+    closingDate:        { x: 370, y: 350, page: 0, maxWidth: 160, size: 9 },
+    possession:         { x: 200, y: 330, page: 0, maxWidth: 220, size: 9 },
   },
 }
 
@@ -53,13 +44,13 @@ export const FORM_40_10: TrecFormDef = {
   id: '40-10',
   name: 'Third Party Financing Addendum',
   url: `${TREC_BASE}/40-10.pdf`,
-  fieldMap: {
-    buyer1Name: 'Buyer Name',
-    propertyAddress: 'Property Address',
-    loanAmount: 'Loan Amount',
-    maxInterestRate: 'Maximum Interest Rate',
-    loanTermYears: 'Loan Term Years',
-    loanType: 'Loan Type',
+  coords: {
+    buyerNames:      { x: 128, y: 700, page: 0, maxWidth: 380, size: 9 },
+    propertyAddress: { x: 128, y: 678, page: 0, maxWidth: 380, size: 9 },
+    loanAmount:      { x: 200, y: 640, page: 0, maxWidth: 120, size: 9 },
+    maxInterestRate: { x: 360, y: 640, page: 0, maxWidth: 80,  size: 9 },
+    loanTermYears:   { x: 480, y: 640, page: 0, maxWidth: 60,  size: 9 },
+    loanType:        { x: 200, y: 620, page: 0, maxWidth: 160, size: 9 },
   },
 }
 
@@ -70,11 +61,11 @@ export const FORM_37_6: TrecFormDef = {
   id: '37-6',
   name: 'Addendum for Property Subject to Mandatory Membership in a Property Owners Association',
   url: `${TREC_BASE}/37-6.pdf`,
-  fieldMap: {
-    buyer1Name: 'Buyer',
-    propertyAddress: 'Property Address',
-    hoaName: 'Association Name',
-    hoaManagementCompany: 'Management Company',
+  coords: {
+    buyerNames:           { x: 128, y: 700, page: 0, maxWidth: 380, size: 9 },
+    propertyAddress:      { x: 128, y: 678, page: 0, maxWidth: 380, size: 9 },
+    hoaName:              { x: 180, y: 630, page: 0, maxWidth: 300, size: 9 },
+    hoaManagementCompany: { x: 220, y: 610, page: 0, maxWidth: 280, size: 9 },
   },
 }
 
@@ -85,23 +76,23 @@ export const FORM_10_7: TrecFormDef = {
   id: '10-7',
   name: 'Addendum for Sale of Other Property by Buyer',
   url: `${TREC_BASE}/10-7.pdf`,
-  fieldMap: {
-    buyer1Name: 'Buyer',
-    propertyAddress: 'Contract Property Address',
-    propertyToSellAddress: 'Property to Sell Address',
+  coords: {
+    buyerNames:            { x: 128, y: 700, page: 0, maxWidth: 380, size: 9 },
+    propertyAddress:       { x: 128, y: 678, page: 0, maxWidth: 380, size: 9 },
+    propertyToSellAddress: { x: 128, y: 640, page: 0, maxWidth: 380, size: 9 },
   },
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Lead-Based Paint Addendum — TREC OP-L (homes built before 1978)
+// Lead-Based Paint Addendum — TREC OP-L
 // ─────────────────────────────────────────────────────────────────────────────
 export const FORM_OP_L: TrecFormDef = {
   id: 'OP-L',
   name: "Addendum for Seller's Disclosure of Information on Lead-Based Paint",
   url: `${TREC_BASE}/OP-L.pdf`,
-  fieldMap: {
-    buyer1Name: 'Buyer',
-    propertyAddress: 'Property Address',
+  coords: {
+    buyerNames:      { x: 128, y: 700, page: 0, maxWidth: 380, size: 9 },
+    propertyAddress: { x: 128, y: 678, page: 0, maxWidth: 380, size: 9 },
   },
 }
 
@@ -112,10 +103,10 @@ export const FORM_11_8: TrecFormDef = {
   id: '11-8',
   name: 'Non-Realty Items Addendum',
   url: `${TREC_BASE}/11-8.pdf`,
-  fieldMap: {
-    buyer1Name: 'Buyer',
-    propertyAddress: 'Property Address',
-    nonRealtyItems: 'Non-Realty Items',
+  coords: {
+    buyerNames:      { x: 128, y: 700, page: 0, maxWidth: 380, size: 9 },
+    propertyAddress: { x: 128, y: 678, page: 0, maxWidth: 380, size: 9 },
+    nonRealtyItems:  { x: 88,  y: 630, page: 0, maxWidth: 450, size: 9 },
   },
 }
 
@@ -126,11 +117,11 @@ export const FORM_16_6: TrecFormDef = {
   id: '16-6',
   name: "Buyer's Temporary Residential Lease",
   url: `${TREC_BASE}/16-6.pdf`,
-  fieldMap: {
-    buyer1Name: 'Landlord (Seller)',
-    propertyAddress: 'Property Address',
-    closingDate: 'Lease Date',
-    buyerTempLeaseDays: 'Lease Days',
+  coords: {
+    buyerNames:         { x: 128, y: 700, page: 0, maxWidth: 380, size: 9 },
+    propertyAddress:    { x: 128, y: 678, page: 0, maxWidth: 380, size: 9 },
+    closingDate:        { x: 200, y: 640, page: 0, maxWidth: 160, size: 9 },
+    buyerTempLeaseDays: { x: 350, y: 640, page: 0, maxWidth: 60,  size: 9 },
   },
 }
 
@@ -141,11 +132,11 @@ export const FORM_15_6: TrecFormDef = {
   id: '15-6',
   name: "Seller's Temporary Residential Lease",
   url: `${TREC_BASE}/15-6.pdf`,
-  fieldMap: {
-    buyer1Name: 'Landlord (Buyer)',
-    propertyAddress: 'Property Address',
-    closingDate: 'Lease Date',
-    sellerTempLeaseDays: 'Lease Days',
+  coords: {
+    buyerNames:           { x: 128, y: 700, page: 0, maxWidth: 380, size: 9 },
+    propertyAddress:      { x: 128, y: 678, page: 0, maxWidth: 380, size: 9 },
+    closingDate:          { x: 200, y: 640, page: 0, maxWidth: 160, size: 9 },
+    sellerTempLeaseDays:  { x: 350, y: 640, page: 0, maxWidth: 60,  size: 9 },
   },
 }
 
