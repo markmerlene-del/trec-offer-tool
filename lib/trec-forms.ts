@@ -20,31 +20,36 @@ export const FORM_20_16: TrecFormDef = {
   url: `${TREC_BASE}/20-16.pdf`,
   coords: {
     // Page 0 — Section 1: Buyer inline blank "and ___(Buyer)"
-    buyerNames:         { x: 370, y: 668, page: 0, maxWidth: 200, size: 9 },
+    buyerNames:         { x: 88,  y: 668, page: 0, maxWidth: 280, size: 9 },
 
     // Page 0 — Section 2A: LAND description lines
     legalDescription:   { x: 155, y: 601, page: 0, maxWidth: 240, size: 9 },
-    city:               { x: 283, y: 587, page: 0, maxWidth: 100, size: 9 },
-    county:             { x: 437, y: 587, page: 0, maxWidth: 100, size: 9 },
-    propertyAddress:    { x: 155, y: 573, page: 0, maxWidth: 320, size: 9 },
+    city:               { x: 283, y: 597, page: 0, maxWidth: 100, size: 9 },
+    county:             { x: 437, y: 597, page: 0, maxWidth: 100, size: 9 },
+    propertyAddress:    { x: 155, y: 585, page: 0, maxWidth: 320, size: 9 },
 
     // Page 0 — Section 3: SALES PRICE (dollar blanks at right margin)
     cashPortion:        { x: 493, y: 306, page: 0, maxWidth: 90, size: 9 },
     loanAmount:         { x: 493, y: 280, page: 0, maxWidth: 90, size: 9 },
     salesPrice:         { x: 493, y: 260, page: 0, maxWidth: 90, size: 9 },
 
-    // Page 1 — Section 5: Earnest money & option period
-    earnestMoney:       { x: 370, y: 680, page: 1, maxWidth: 100, size: 9 },
-    earnestMoneyHolder: { x: 190, y: 660, page: 1, maxWidth: 220, size: 9 },
-    optionDays:         { x: 195, y: 620, page: 1, maxWidth: 40,  size: 9 },
-    optionFee:          { x: 310, y: 620, page: 1, maxWidth: 80,  size: 9 },
+    // Page 1 — Section 5A: Earnest money & option fee
+    // Structure: "deliver to [escrowHolder], at [addr]: $[earnestMoney] as earnest money and $[optionFee] as Option Fee"
+    earnestMoneyHolder: { x: 190, y: 722, page: 1, maxWidth: 220, size: 9 },
+    earnestMoney:       { x: 370, y: 706, page: 1, maxWidth: 100, size: 9 },
+    optionFee:          { x: 340, y: 692, page: 1, maxWidth: 80,  size: 9 },
 
-    // Page 1 — Section 6: Title company
-    titleCompany:       { x: 195, y: 555, page: 1, maxWidth: 260, size: 9 },
+    // Page 1 — Section 5B: Option period (days)
+    optionDays:         { x: 175, y: 555, page: 1, maxWidth: 40,  size: 9 },
 
-    // Page 1 — Section 9: Closing date & possession
-    closingDate:        { x: 310, y: 465, page: 1, maxWidth: 120, size: 9 },
-    possession:         { x: 300, y: 430, page: 1, maxWidth: 180, size: 9 },
+    // Page 1 — Section 6A: Title company blank
+    titleCompany:       { x: 195, y: 340, page: 1, maxWidth: 260, size: 9 },
+
+    // Page 2 — Section 9: Closing date
+    closingDate:        { x: 310, y: 680, page: 2, maxWidth: 120, size: 9 },
+
+    // Page 2 — Section 10: Possession
+    possession:         { x: 200, y: 590, page: 2, maxWidth: 180, size: 9 },
   },
 }
 
