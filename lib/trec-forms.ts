@@ -19,8 +19,8 @@ export const FORM_20_16: TrecFormDef = {
   name: 'One to Four Family Residential Contract (Resale)',
   url: `${TREC_BASE}/20-16.pdf`,
   coords: {
-    // Page 0 — Section 1: Buyer inline blank "and ___(Buyer)"
-    buyerNames:         { x: 88,  y: 668, page: 0, maxWidth: 280, size: 9 },
+    // Page 0 — Section 1: Buyer inline blank — starts after printed "(Seller) and "
+    buyerNames:         { x: 168, y: 668, page: 0, maxWidth: 200, size: 9 },
 
     // Page 0 — Section 2A: LAND description lines
     legalDescription:   { x: 155, y: 601, page: 0, maxWidth: 240, size: 9 },
@@ -36,14 +36,14 @@ export const FORM_20_16: TrecFormDef = {
     // Page 1 — Section 5A: Earnest money & option fee
     // Structure: "deliver to [escrowHolder], at [addr]: $[earnestMoney] as earnest money and $[optionFee] as Option Fee"
     earnestMoneyHolder: { x: 190, y: 722, page: 1, maxWidth: 220, size: 9 },
-    earnestMoney:       { x: 370, y: 706, page: 1, maxWidth: 100, size: 9 },
+    earnestMoney:       { x: 490, y: 706, page: 1, maxWidth: 90,  size: 9 },
     optionFee:          { x: 340, y: 692, page: 1, maxWidth: 80,  size: 9 },
 
-    // Page 1 — Section 5B: Option period (days)
-    optionDays:         { x: 175, y: 555, page: 1, maxWidth: 40,  size: 9 },
+    // Page 1 — Section 5B: Option period (days) — "within ___ days after Effective Date"
+    optionDays:         { x: 175, y: 455, page: 1, maxWidth: 40,  size: 9 },
 
-    // Page 1 — Section 6A: Title company blank
-    titleCompany:       { x: 195, y: 340, page: 1, maxWidth: 260, size: 9 },
+    // Page 1 — Section 6A: Title company — blank starts after "issued by "
+    titleCompany:       { x: 348, y: 340, page: 1, maxWidth: 200, size: 9 },
 
     // Page 2 — Section 9: Closing date
     closingDate:        { x: 310, y: 680, page: 2, maxWidth: 120, size: 9 },
