@@ -34,13 +34,15 @@ export const FORM_20_16: TrecFormDef = {
     salesPrice:         { x: 493, y: 260, page: 0, maxWidth: 90, size: 9 },
 
     // Page 1 — Section 5A: Earnest money & option fee
-    // Structure: "deliver to [escrowHolder], at [addr]: $[earnestMoney] as earnest money and $[optionFee] as Option Fee"
-    earnestMoneyHolder: { x: 190, y: 722, page: 1, maxWidth: 220, size: 9 },
-    earnestMoney:       { x: 490, y: 706, page: 1, maxWidth: 90,  size: 9 },
-    optionFee:          { x: 340, y: 692, page: 1, maxWidth: 80,  size: 9 },
+    // Line B: "must deliver to [holder], as escrow agent, at"
+    // Line C: "(address): $[earnestMoney]"
+    // Line D: "as earnest money and $[optionFee] as Option Fee"
+    earnestMoneyHolder: { x: 190, y: 706, page: 1, maxWidth: 220, size: 9 },
+    earnestMoney:       { x: 490, y: 692, page: 1, maxWidth: 90,  size: 9 },
+    optionFee:          { x: 350, y: 678, page: 1, maxWidth: 80,  size: 9 },
 
     // Page 1 — Section 5B: Option period (days) — "within ___ days after Effective Date"
-    optionDays:         { x: 175, y: 455, page: 1, maxWidth: 40,  size: 9 },
+    optionDays:         { x: 175, y: 420, page: 1, maxWidth: 40,  size: 9 },
 
     // Page 1 — Section 6A: Title company — blank starts after "issued by "
     titleCompany:       { x: 348, y: 340, page: 1, maxWidth: 200, size: 9 },
@@ -61,13 +63,14 @@ export const FORM_40_10: TrecFormDef = {
   name: 'Third Party Financing Addendum',
   url: `${TREC_BASE}/40-10.pdf`,
   coords: {
-    buyerNames:      { x: 88,  y: 716, page: 0, maxWidth: 420, size: 9 },
-    propertyAddress: { x: 88,  y: 694, page: 0, maxWidth: 420, size: 9 },
-    // Loan amounts fill into section A (Conventional) inline blanks
+    // Buyer blank is just below the form title
+    buyerNames:      { x: 88,  y: 700, page: 0, maxWidth: 420, size: 9 },
+    // Address blank is below "TO CONTRACT CONCERNING THE PROPERTY AT"
+    propertyAddress: { x: 88,  y: 660, page: 0, maxWidth: 420, size: 9 },
+    // Loan amounts fill into section A(1) inline blanks
     loanAmount:      { x: 310, y: 572, page: 0, maxWidth: 110, size: 9 },
     loanTermYears:   { x: 468, y: 572, page: 0, maxWidth: 40,  size: 9 },
     maxInterestRate: { x: 530, y: 558, page: 0, maxWidth: 40,  size: 9 },
-    loanType:        { x: 88,  y: 672, page: 0, maxWidth: 160, size: 9 },
   },
 }
 
@@ -109,7 +112,7 @@ export const FORM_OP_L: TrecFormDef = {
   url: `${TREC_BASE}/OP-L.pdf`,
   coords: {
     buyerNames:      { x: 88, y: 682, page: 0, maxWidth: 220, size: 9 },
-    propertyAddress: { x: 88, y: 658, page: 0, maxWidth: 420, size: 9 },
+    propertyAddress: { x: 88, y: 668, page: 0, maxWidth: 420, size: 9 },
   },
 }
 
