@@ -47,11 +47,11 @@ export const FORM_20_16: TrecFormDef = {
     // Page 1 — Section 6A: Title company — blank starts after "issued by "
     titleCompany:       { x: 348, y: 340, page: 1, maxWidth: 200, size: 9 },
 
-    // Page 2 — Section 9: Closing date
-    closingDate:        { x: 310, y: 680, page: 2, maxWidth: 120, size: 9 },
+    // Page 3 — Section 9: Closing date
+    closingDate:        { x: 310, y: 680, page: 3, maxWidth: 120, size: 9 },
 
-    // Page 2 — Section 10: Possession
-    possession:         { x: 200, y: 590, page: 2, maxWidth: 180, size: 9 },
+    // Page 3 — Section 10: Possession
+    possession:         { x: 200, y: 590, page: 3, maxWidth: 180, size: 9 },
   },
 }
 
@@ -64,9 +64,9 @@ export const FORM_40_10: TrecFormDef = {
   url: `${TREC_BASE}/40-10.pdf`,
   coords: {
     // Buyer blank is just below the form title
-    buyerNames:      { x: 88,  y: 700, page: 0, maxWidth: 420, size: 9 },
+    buyerNames:      { x: 88,  y: 668, page: 0, maxWidth: 420, size: 9 },
     // Address blank is below "TO CONTRACT CONCERNING THE PROPERTY AT"
-    propertyAddress: { x: 88,  y: 660, page: 0, maxWidth: 420, size: 9 },
+    propertyAddress: { x: 88,  y: 640, page: 0, maxWidth: 420, size: 9 },
     // Loan amounts fill into section A(1) inline blanks
     loanAmount:      { x: 310, y: 572, page: 0, maxWidth: 110, size: 9 },
     loanTermYears:   { x: 468, y: 572, page: 0, maxWidth: 40,  size: 9 },
@@ -111,8 +111,9 @@ export const FORM_OP_L: TrecFormDef = {
   name: "Addendum for Seller's Disclosure of Information on Lead-Based Paint",
   url: `${TREC_BASE}/OP-L.pdf`,
   coords: {
-    buyerNames:      { x: 88, y: 682, page: 0, maxWidth: 220, size: 9 },
-    propertyAddress: { x: 88, y: 668, page: 0, maxWidth: 420, size: 9 },
+    buyerNames:      { x: 88,  y: 682, page: 0, maxWidth: 220, size: 9 },
+    // "CONCERNING THE PROPERTY AT" is printed text ending ~x:300; address starts after
+    propertyAddress: { x: 305, y: 668, page: 0, maxWidth: 215, size: 9 },
   },
 }
 
