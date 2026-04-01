@@ -23,8 +23,8 @@ export const FORM_20_16: TrecFormDef = {
     buyerNames:         { x: 168, y: 668, page: 0, maxWidth: 200, size: 9 },
 
     // Page 0 — Section 2A: LAND — "Lot ___, Block ___, ___ Addition, City of ___, County of ___"
-    lot:                { x: 152, y: 601, page: 0, maxWidth: 30,  size: 9 },
-    block:              { x: 210, y: 601, page: 0, maxWidth: 25,  size: 9 },
+    lot:                { x: 152, y: 601, page: 0, maxWidth: 28,  size: 9 },
+    block:              { x: 240, y: 601, page: 0, maxWidth: 25,  size: 9 },
     subdivision:        { x: 247, y: 601, page: 0, maxWidth: 50,  size: 9 },
     city:               { x: 380, y: 601, page: 0, maxWidth: 80,  size: 9 },
     county:             { x: 487, y: 601, page: 0, maxWidth: 80,  size: 9 },
@@ -49,11 +49,11 @@ export const FORM_20_16: TrecFormDef = {
     // Page 1 — Section 6A: Title company — blank starts after "issued by "
     titleCompany:       { x: 348, y: 340, page: 1, maxWidth: 200, size: 9 },
 
-    // Page 3 — Section 9: Closing date
-    closingDate:        { x: 310, y: 680, page: 3, maxWidth: 120, size: 9 },
+    // Page 5 — Section 9: Closing date (Section 9 is on PDF page 6, index 5)
+    closingDate:        { x: 310, y: 680, page: 5, maxWidth: 120, size: 9 },
 
-    // Page 3 — Section 10: Possession
-    possession:         { x: 200, y: 590, page: 3, maxWidth: 180, size: 9 },
+    // Page 5 — Section 10: Possession
+    possession:         { x: 200, y: 590, page: 5, maxWidth: 180, size: 9 },
   },
 }
 

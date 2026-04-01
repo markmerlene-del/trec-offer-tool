@@ -93,7 +93,7 @@ export default function Home() {
     setError(null)
     setSuccess(false)
     try {
-      const res = await fetch('/api/generate-forms', {
+      const res = await fetch('/api/generate-forms?debug=1', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
