@@ -35,7 +35,9 @@ const DEFAULT_DATA: OfferFormData = {
     county: '',
     state: 'TX',
     zip: '',
-    legalDescription: '',
+    lot: '',
+    block: '',
+    subdivision: '',
     mlsNumber: '',
   },
   terms: {

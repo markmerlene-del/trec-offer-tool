@@ -22,10 +22,12 @@ export const FORM_20_16: TrecFormDef = {
     // Page 0 — Section 1: Buyer inline blank — starts after printed "(Seller) and "
     buyerNames:         { x: 168, y: 668, page: 0, maxWidth: 200, size: 9 },
 
-    // Page 0 — Section 2A: LAND description lines
-    legalDescription:   { x: 155, y: 601, page: 0, maxWidth: 240, size: 9 },
-    city:               { x: 283, y: 597, page: 0, maxWidth: 100, size: 9 },
-    county:             { x: 437, y: 597, page: 0, maxWidth: 100, size: 9 },
+    // Page 0 — Section 2A: LAND — "Lot ___, Block ___, ___ Addition, City of ___, County of ___"
+    lot:                { x: 152, y: 601, page: 0, maxWidth: 30,  size: 9 },
+    block:              { x: 210, y: 601, page: 0, maxWidth: 25,  size: 9 },
+    subdivision:        { x: 247, y: 601, page: 0, maxWidth: 50,  size: 9 },
+    city:               { x: 380, y: 601, page: 0, maxWidth: 80,  size: 9 },
+    county:             { x: 487, y: 601, page: 0, maxWidth: 80,  size: 9 },
     propertyAddress:    { x: 155, y: 585, page: 0, maxWidth: 320, size: 9 },
 
     // Page 0 — Section 3: SALES PRICE (dollar blanks at right margin)

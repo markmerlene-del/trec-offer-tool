@@ -1,7 +1,7 @@
 'use client'
 
 import { PropertyInfo } from '@/lib/types'
-import { Input, TextArea } from '@/components/FormField'
+import { Input } from '@/components/FormField'
 
 interface Props {
   data: PropertyInfo
@@ -61,14 +61,32 @@ export function PropertyInfoStep({ data, onChange }: Props) {
         />
       </div>
 
-      <TextArea
-        label="Legal Description"
-        required
-        value={data.legalDescription}
-        onChange={(e) => set('legalDescription', e.target.value)}
-        placeholder="Lot 1, Block 2, Subdivision Name, City, County, State"
-        hint="Found on the deed or tax records"
-      />
+      <div className="grid grid-cols-3 gap-4">
+        <Input
+          label="Lot"
+          required
+          value={data.lot}
+          onChange={(e) => set('lot', e.target.value)}
+          placeholder="1"
+          hint="Lot number"
+        />
+        <Input
+          label="Block"
+          required
+          value={data.block}
+          onChange={(e) => set('block', e.target.value)}
+          placeholder="A"
+          hint="Block number"
+        />
+        <Input
+          label="Subdivision"
+          required
+          value={data.subdivision}
+          onChange={(e) => set('subdivision', e.target.value)}
+          placeholder="Sunset Hills"
+          hint="Subdivision/addition name"
+        />
+      </div>
 
       <Input
         label="MLS Number"

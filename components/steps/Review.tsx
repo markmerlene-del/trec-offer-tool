@@ -31,7 +31,7 @@ export function ReviewStep({ data }: Props) {
       <Section title="Property">
         <Row label="Address">{property.streetAddress}, {property.city}, {property.state} {property.zip}</Row>
         <Row label="County">{property.county}</Row>
-        <Row label="Legal">{property.legalDescription}</Row>
+        <Row label="Legal">Lot {property.lot}, Block {property.block}, {property.subdivision}</Row>
       </Section>
 
       <Section title="Purchase Terms">

@@ -13,7 +13,9 @@ export interface PropertyInfo {
   county: string
   state: string
   zip: string
-  legalDescription: string
+  lot: string
+  block: string
+  subdivision: string
   mlsNumber: string
 }
 
