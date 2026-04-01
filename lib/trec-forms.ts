@@ -41,7 +41,7 @@ export const FORM_20_16: TrecFormDef = {
     // Line D: "as earnest money and $[optionFee] as Option Fee"
     earnestMoneyHolder: { x: 190, y: 706, page: 1, maxWidth: 220, size: 9 },
     earnestMoney:       { x: 490, y: 692, page: 1, maxWidth: 90,  size: 9 },
-    optionFee:          { x: 350, y: 686, page: 1, maxWidth: 80,  size: 9 },
+    optionFee:          { x: 350, y: 670, page: 1, maxWidth: 80,  size: 9 },
 
     // Page 1 — Section 5B: Option period (days) — "within ___ days after Effective Date"
     optionDays:         { x: 175, y: 420, page: 1, maxWidth: 40,  size: 9 },
@@ -65,14 +65,14 @@ export const FORM_40_10: TrecFormDef = {
   name: 'Third Party Financing Addendum',
   url: `${TREC_BASE}/40-10.pdf`,
   coords: {
-    // Buyer blank is just below the form title
-    buyerNames:      { x: 88,  y: 668, page: 0, maxWidth: 420, size: 9 },
+    // Buyer blank is between form title and "TO CONTRACT CONCERNING THE PROPERTY AT"
+    buyerNames:      { x: 88,  y: 680, page: 0, maxWidth: 420, size: 9 },
     // Address blank is below "TO CONTRACT CONCERNING THE PROPERTY AT"
     propertyAddress: { x: 88,  y: 640, page: 0, maxWidth: 420, size: 9 },
-    // Loan amounts fill into section A(1) inline blanks
-    loanAmount:      { x: 310, y: 572, page: 0, maxWidth: 110, size: 9 },
-    loanTermYears:   { x: 468, y: 572, page: 0, maxWidth: 40,  size: 9 },
-    maxInterestRate: { x: 530, y: 558, page: 0, maxWidth: 40,  size: 9 },
+    // Loan amounts fill into section A(1) inline blanks — 2 lines below "(Check applicable boxes):"
+    loanAmount:      { x: 310, y: 548, page: 0, maxWidth: 110, size: 9 },
+    loanTermYears:   { x: 468, y: 548, page: 0, maxWidth: 40,  size: 9 },
+    maxInterestRate: { x: 530, y: 534, page: 0, maxWidth: 40,  size: 9 },
   },
 }
 
