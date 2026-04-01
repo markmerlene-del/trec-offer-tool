@@ -41,7 +41,7 @@ export const FORM_20_16: TrecFormDef = {
     // Line D: "as earnest money and $[optionFee] as Option Fee"
     earnestMoneyHolder: { x: 190, y: 706, page: 1, maxWidth: 220, size: 9 },
     earnestMoney:       { x: 490, y: 692, page: 1, maxWidth: 90,  size: 9 },
-    optionFee:          { x: 350, y: 678, page: 1, maxWidth: 80,  size: 9 },
+    optionFee:          { x: 350, y: 686, page: 1, maxWidth: 80,  size: 9 },
 
     // Page 1 — Section 5B: Option period (days) — "within ___ days after Effective Date"
     optionDays:         { x: 175, y: 420, page: 1, maxWidth: 40,  size: 9 },
